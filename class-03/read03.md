@@ -1,56 +1,83 @@
-# Passing Functions as Props
+# React Docs - lists and keys
 
-- There should be a single “source of truth” for any data that changes in a React application. 
+1- What does .map() return?
 
-Basic List Component
+- A new array where each element is the result of calling the function on the corresponding element from the original array.
 
+2- If I want to loop through an array and display each value in JSX, how do I do that in React?
 
-We can refactor the previous example into a component that accepts an array of numbers and outputs a list of elements.
+- by use map()
+
+3- Each list item needs a unique __key__.
+
+4- What is the purpose of a key?
+
+- Keys help React identify which items have changed, are added, or are removed.
+
+# The Spread Operator
+
+1- What is the spread operator?
+
+- in JavaScript, spread syntax refers to the use of an ellipsis of three dots (…) to expand an iterable object into the list of arguments.
+
+2- List 4 things that the spread operator can do.
+
+- Copying an array
+- Concatenating or combining arrays
+- Using Math functions
+- Using an array as arguments
+
+3- Give an example of using the spread operator to combine two arrays.
 
 ```
-const numbers = [1, 2, 3, 4, 5];
-ReactDOM.render(
-  <NumberList numbers={numbers} />,
-  document.getElementById('root')
-);
-```
- 
-- Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity:
+const hello = {hello: "😋😛😜🤪😝"}
+const world = {world: "🙂🙃😉😊😇🥰😍🤩!"}
 
-- The best way to pick a key is to use a string that uniquely identifies a list item among its siblings. Most often you would use IDs from your data as keys:
-
-```
-  <li key={todo.id}>
-    {todo.text}
-  </li>
-);
+const helloWorld = {...hello,...world}
+console.log(helloWorld) // Object { hello: "😋😛😜🤪😝", world: "🙂🙃😉😊😇🥰😍🤩!" }
 ```
 
-- When you don’t have stable IDs for rendered items, you may use the item index as a key as a last resort:
+4- Give an example of using the spread operator to add a new item to an array.
 
 ```
-  // Only do this if items have no stable IDs
-  <li key={index}>
-    {todo.text}
-  </li>
-);
+const fewFruit = ['🍏','🍊','🍌']
+const fewMoreFruit = ['🍉', '🍍', ...fewFruit]
+console.log(fewMoreFruit) //  Array(5) [ "🍉", "🍍", "🍏", "🍊", "🍌" ]
 ```
 
-- Keys used within arrays should be unique among their siblings.
+5- Give an example of using the spread operator to combine two objects into one.
 
+```
+const objectOne = {hello: "🤪"}
+const objectTwo = {world: "🐻"}
+const objectThree = {...objectOne, ...objectTwo, laugh: "😂"}
+console.log(objectThree) // Object { hello: "🤪", world: "🐻", laugh: "😂" }
+const objectFour = {...objectOne, ...objectTwo, laugh: () => {console.log("😂".repeat(5))}}
+objectFour.laugh() // 😂😂😂😂😂
+```
 
-- JSX allows embedding any expression in curly braces so we could inline the map().
+# How to Pass Functions Between Components
 
-## How to Use the Spread Operator:
+1- In the video, what is the first step that the developer does to pass functions between components?
 
-- The spread operator is a useful and quick syntax for adding items to arrays, combining arrays or objects, and spreading an array out into a function’s arguments.
+- we can pass it like any other props in the child component  like :
 
-## What is the spread operator?
+```
+fun={this.functionNmae}
+```
 
-- The spread operator was added to JavaScript in ES6 (ES2015), just like the rest parameters, which have the same syntax: three magic dots …
+2- In your own words, what does the increment function do?
 
-## What spread operator used for?
+- when any event oucrrs in the child the event call function in child component and in that funtion we call the parent function.
 
-- Spread operator to the rescue! It looks similar to rest parameters, also using ..., but does quite the opposite.
+3- How can you pass a method from a parent component into a child component?
 
-- the spread syntax expands an iterable object, usually an array, though it can be used on any interable, including a string.
+- in child tag we add :
+
+```
+fun={this.functionNmae}
+```
+
+4- How does the child component invoke a method that was passed to it from a parent component?
+
+- from the props like when any event oucrrs the event call function in child component and in that funtion we call the parent function.
