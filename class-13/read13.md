@@ -22,7 +22,7 @@
 
 5- What code would you use if a resource used to exist but no longer does?
 
-- code 404
+- code 410
 
 6- What is the ‘Forbidden’ status code?
 
